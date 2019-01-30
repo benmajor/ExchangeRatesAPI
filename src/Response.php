@@ -61,7 +61,7 @@ class Response
     # Get the exchange rates:
     public function getRates()
     {
-        # Convert the rates to a key/value array:
+        # Convert the rates to a key / value array:
         return json_decode( json_encode($this->rates), true );
     }
     

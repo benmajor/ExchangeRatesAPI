@@ -5,7 +5,7 @@
  * Written by Ben Major (https://github.com/benmajor)
  *
  * @link      https://github.com/benmajor/PHP-ExchangeRatesAPI
- * @copyright Copyright (c) 2018 Ben Major
+ * @copyright Copyright (c) 2019 Ben Major
  * @license   https://github.com/benmajor/PHP-ExchangeRatesAPI/blob/master/LICENSE (MIT License)
  */
 
