@@ -78,7 +78,7 @@ class Response
         
         if( $this->body->rates->{$code} )
         {
-            return $this->body->rates[$code];
+            return $this->body->rates->{$code};
         }
         
         return null;
