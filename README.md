@@ -1,5 +1,8 @@
-# ExchangeRatesAPI
+# ExchangeRatesAPI - Currency Exchange Rates API SDK
 
+[![Latest Version](https://img.shields.io/packagist/v/benmajor/exchange-rates-api.svg?style=flat-square)](https://packagist.org/packages/benmajor/exchange-rates-api)
+[![Packagist](https://img.shields.io/packagist/dm/benmajor/exchange-rates-api.svg)](https://packagist.org/packages/benmajor/exchange-rates-api)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
 
 This is an unofficial wrapper for the awesome, free [ExchangeRatesAPI](https://exchangeratesapi.io/), which provides exchange rate lookups courtesy of the [Central European Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html). It features a number of useful functions and can be installed easily using [Composer](https://getcomposer.org/).
