@@ -139,7 +139,7 @@ class ExchangeRatesAPI
         throw new Exception( $this->_errors['format.invalid_date'] );
     }
     
-    #�Remove the date-to:
+    # Remove the date-to:
     public function removeDateTo()
     {
         $this->dateTo = null;
@@ -303,7 +303,7 @@ class ExchangeRatesAPI
             $params['symbols'] = $this->getRates(',');
         }
         
-        #�Begin the sending:
+        # Begin the sending:
         try
         {
             $guzzleResponse = $this->client->request('GET', $endpoint, [ 'query' => $params ]);
