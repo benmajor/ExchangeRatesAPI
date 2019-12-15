@@ -115,10 +115,18 @@ Set the base currency to be used for exchange rates. `$code` should be passed an
 `getBaseCurrency()`:<br />
 Returns the currently specified base currency. If `setBaseCurrency()` hasn't been called, this will return the default base currency `EUR`.
 
+`addRates( array $codes )`:<br />
+Adds multiple currencies to be retrieved. `$codes` should be an array of ISO 4217 codes (e.g. `["EUR", "GBP", "BGN"]`).<br />
+Each code in the array must be of the [supported currency codes](#5-supported-currencies).<br />
+ 
 `addRate( string $code )`:<br />
 Adds a new currency to be retrieved. `$code` should be passed an ISO 4217 code (e.g. `EUR`).<br />
 `$code` must be one of the [supported currency codes](#5-supported-currencies).<br />
 If no rates are added, **all** rates will be returned.
+
+`removeRates( array $codes )`:<br />
+Removes multiple currencies that has already been added to the retrieval list.  `$codes` should be an array of ISO 4217 codes (e.g. `["EUR", "GBP", "BGN"]`).<br />
+`$code` must be one of the [supported currency codes](#5-supported-currencies).
 
 `removeRate( string $code )`:<br />
 Removes a currency that has already been added to the retrieval list.  `$code` should be passed an ISO 4217 code (e.g. `EUR`).<br />
