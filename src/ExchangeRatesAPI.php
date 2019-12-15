@@ -139,7 +139,7 @@ class ExchangeRatesAPI
         throw new Exception( $this->_errors['format.invalid_date'] );
     }
     
-    #ÊRemove the date-to:
+    #ï¿½Remove the date-to:
     public function removeDateTo()
     {
         $this->dateTo = null;
@@ -175,7 +175,17 @@ class ExchangeRatesAPI
         # Return object to preserve method-chaining:
         return $this;
     }
-    
+
+    # Add multiple currencies at once
+    public function addRates( array $currencies )
+    {
+        foreach ($currencies as $currency)
+        {
+            $this->addRate($currency);
+        }
+        return $this;
+    }
+
     # Add a currency to the returned rates:
     public function addRate( string $currency )
     {
@@ -189,7 +199,17 @@ class ExchangeRatesAPI
         # Return object to preserve method-chaining:
         return $this;
     }
-    
+
+    # Remove multiple currencies at once
+    public function removeRates( array $currencies )
+    {
+        foreach ($currencies as $currency)
+        {
+            $this->removeRate($currency);
+        }
+        return $this;
+    }
+
     # Remove a currency from the returned rates:
     public function removeRate( string $currency )
     {
@@ -197,7 +217,7 @@ class ExchangeRatesAPI
         $currencyCode = $this->sanitizeCurrencyCode($currency);
         
         # Verify it's valid:
-        $this->verifyCurrencyCode();
+        $this->verifyCurrencyCode($currencyCode);
         
         $newRates = [ ];
         
@@ -283,7 +303,7 @@ class ExchangeRatesAPI
             $params['symbols'] = $this->getRates(',');
         }
         
-        #ÊBegin the sending:
+        #ï¿½Begin the sending:
         try
         {
             $guzzleResponse = $this->client->request('GET', $endpoint, [ 'query' => $params ]);
