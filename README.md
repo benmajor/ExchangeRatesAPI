@@ -57,7 +57,14 @@ Get historical rates for any day since 1999:
 
 ```
 $lookup = new ExchangeRatesAPI();
-$rates  = $lookup->addDateFrom('2015-01-20')->fetch();
+$rates  = $lookup->setFetchDate('2015-01-20')->fetch();
+```
+
+Get historical rates for a time period:
+
+```
+$lookup = new ExchangeRatesAPI();
+$rates  = $lookup->addDateFrom('2015-01-20')->addDateTo('2015-01-21')->fetch();
 ```
 
 **Set the base currency:**<br />
