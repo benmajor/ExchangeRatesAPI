@@ -49,8 +49,9 @@ use \BenMajor\ExchangeRatesAPI\Response;
 use \BenMajor\ExchangeRatesAPI\Exception;
 
 $access_key = '<YOUR ACCESS KEY>';
+$use_ssl = false; # Free plans are restricted to non-SSL only.
 
-$lookup = new ExchangeRatesAPI($access_key, false);
+$lookup = new ExchangeRatesAPI($access_key, $use_ssl);
 $rates  = $lookup->fetch();
 ```
 
