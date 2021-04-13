@@ -48,7 +48,10 @@ use \BenMajor\ExchangeRatesAPI\ExchangeRatesAPI;
 use \BenMajor\ExchangeRatesAPI\Response;
 use \BenMajor\ExchangeRatesAPI\Exception;
 
-$lookup = new ExchangeRatesAPI();
+$access_key = '<YOUR ACCESS KEY>';
+$use_ssl = false; # Free plans are restricted to non-SSL only.
+
+$lookup = new ExchangeRatesAPI($access_key, $use_ssl);
 $rates  = $lookup->fetch();
 ```
 
@@ -56,14 +59,18 @@ $rates  = $lookup->fetch();
 Get historical rates for any day since 1999:
 
 ```
-$lookup = new ExchangeRatesAPI();
+$access_key = '<YOUR ACCESS KEY>';
+
+$lookup = new ExchangeRatesAPI($access_key);
 $rates  = $lookup->setFetchDate('2015-01-20')->fetch();
 ```
 
 Get historical rates for a time period:
 
 ```
-$lookup = new ExchangeRatesAPI();
+$access_key = '<YOUR ACCESS KEY>';
+
+$lookup = new ExchangeRatesAPI($access_key);
 $rates  = $lookup->addDateFrom('2015-01-20')->addDateTo('2015-01-21')->fetch();
 ```
 
@@ -71,7 +78,9 @@ $rates  = $lookup->addDateFrom('2015-01-20')->addDateTo('2015-01-21')->fetch();
 By default, the base currency is set to Euro (EUR), but it can be changed: 
 
 ```
-$lookup = new ExchangeRatesAPI();
+$access_key = '<YOUR ACCESS KEY>';
+
+$lookup = new ExchangeRatesAPI($access_key);
 $rates  = $lookup->setBaseCurrency('GBP')->fetch();
 ```
 
@@ -79,7 +88,9 @@ $rates  = $lookup->setBaseCurrency('GBP')->fetch();
 If you do not want all current rates, it's possible to specify only the currencies you want using `addRate()`. The following code fetches only the exchange rate between GBP and EUR:
 
 ```
-$lookup = new ExchangeRatesAPI();
+$access_key = '<YOUR ACCESS KEY>';
+
+$lookup = new ExchangeRatesAPI($access_key);
 $rates  = $lookup->addRate('EUR')->setBaseCurrency('GBP')->fetch();
 ```
 
@@ -107,6 +118,12 @@ Set the end date for the retrieval of historic rates. `$to` should be a string c
 
 `getDateTo()`:<br />
 Returns the specified end date for the retrieval of historic rates. Returns `null` if none is specified.
+
+`getAccessKey()`:<br />
+Returns the `access_key` that is currently in use.
+
+`getUseSSL()`:<br />
+Returns a boolean flag that determines which API URL will be used to perform requests. Free plans are restricted to non-SSL usage.
 
 `removeDateTo()`:<br />
 Removes the specified end date for the retrieval of historic rates.
@@ -138,6 +155,12 @@ Removes multiple currencies that has already been added to the retrieval list.  
 `removeRate( string $code )`:<br />
 Removes a currency that has already been added to the retrieval list.  `$code` should be passed an ISO 4217 code (e.g. `EUR`).<br />
 `$code` must be one of the [supported currency codes](#5-supported-currencies).
+
+`setAccessKey( string $access_key )`:<br />
+Sets `access_key` to be used in all requests.
+
+`setUseSSL( bool $use_ssl )`:<br />
+Sets the API URL according to the selected mode (SSL or non-SSL). Free plans are restricted to non-SSL usage.
 
 `fetch( bool $returnJSON = false, bool $parseJSON = true )`:<br />
 Send off the request to the API and return either a `Response` object, or the raw JSON response. If `$returnJSON` is set to `true`, a standard PHP object will be returned, rather than the `ExchangeRatesAPI\Response` object. 
