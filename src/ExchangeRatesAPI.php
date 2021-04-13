@@ -13,6 +13,12 @@ namespace BenMajor\ExchangeRatesAPI;
 
 class ExchangeRatesAPI
 {
+    # Default API URL:
+    const API_URL_SSL = 'https://api.exchangeratesapi.io/';
+    
+    # Free plan API URL:
+    const API_URL_NON_SSL = 'http://api.exchangeratesapi.io/';
+    
     # Fetch date
     private $fetchDate;
 
@@ -32,7 +38,7 @@ class ExchangeRatesAPI
     private $client;
     
     # The URL of the API:
-    private $apiURL = 'https://api.exchangeratesapi.io/';
+    private $apiURL = self::API_URL_SSL;
     
     # Regular Expression for the date:
     private $dateRegExp = '/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/';
@@ -57,8 +63,14 @@ class ExchangeRatesAPI
         'format.invalid_rounding'      => 'Rounding precision must be specified as a numeric value.'
     ];
     
-    function __construct(  )
+    # ExchangeRatesAPI Access Key:
+    private $access_key;
+    
+    function __construct( string $access_key = null, bool $use_ssl = true )
     {
+        $this->setAccessKey($access_key);
+        $this->setUseSSL($use_ssl);
+        
         $this->client = new \GuzzleHttp\Client([ 'base_uri' => $this->apiURL ]);
     }
     
@@ -102,6 +114,18 @@ class ExchangeRatesAPI
     public function getRates( string $concat = null )
     {
         return (! is_null($concat) ) ? implode($concat, $this->rates) : $this->rates;
+    }
+    
+    # Get access key:
+    public function getAccessKey()
+    {
+        return $this->access_key;
+    }
+    
+    # Get boolean flag for SSL usage:
+    public function getUseSSL()
+    {
+        return ($this->apiURL == self::API_URL_SSL);
     }
     
     /****************************/
@@ -259,6 +283,30 @@ class ExchangeRatesAPI
         return $this;
     }
     
+    # Set access key:
+    public function setAccessKey( string $access_key = null )
+    {
+        $this->access_key = $access_key;
+        
+        # Return object to preseve method chaining:
+        return $this;
+    }
+
+    # Set SSL flag and API URL:
+    public function setUseSSL( bool $use_ssl = true )
+    {
+        if ( $use_ssl )
+        {
+            $this->apiURL = self::API_URL_SSL;
+        }
+        else
+        {
+            $this->apiURL = self::API_URL_NON_SSL;
+        }
+        
+        return $this;
+    }
+
     /****************************/
     /*                          */
     /*   API FUNCTION CALLS     */
@@ -297,6 +345,12 @@ class ExchangeRatesAPI
     {
         # Build the URL:
         $params = [ ];
+        
+        # Set access key if available:
+        if ( !is_null($this->getAccessKey()) )
+        {
+            $params['access_key'] = $this->getAccessKey();
+        }
 
         # Set the relevant endpoint:
         if( is_null($this->dateFrom) )
