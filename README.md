@@ -5,27 +5,24 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
 
-This is an unofficial wrapper for the awesome, free [ExchangeRatesAPI](https://exchangeratesapi.io/), which provides exchange rate lookups courtesy of the [Central European Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html). It features a number of useful functions and can be installed easily using [Composer](https://getcomposer.org/).
+<strike>This is an unofficial wrapper for the awesome, free [ExchangeRatesAPI](https://exchangeratesapi.io/), which provides exchange rate lookups courtesy of the [Central European Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html). It features a number of useful functions and can be installed easily using [Composer](https://getcomposer.org/).</strike>
+
+**4.0.0 update:**  
+Following pricing changes for [ExchangeRatesAPI](https://exchangerate.host/), this project now uses ExchangeRates.host as its API provider. This should now be considered an unofficial SDK for . 4.0.0 should be backwards compatible with older versions which relied on the no-longer-free ExchangeRatesAPI. 
 
 ## Table of Contents:
 
-1. [Version History](#1-version-history)
-2. [Installation](#2-installation)
-3. [Getting Started](#3-getting-started)
-4. [API Reference](#4-api-reference)
-5. [Supported Currencies](#5-supported-currencies)
-6. [Requirements](#6-requirements)
-7. [Bugs & Features](#7-bugs-features)
-8. [License](#8-license)
+1. [Installation](#2-installation)
+2. [Getting Started](#3-getting-started)
+3. [API Reference](#4-api-reference)
+4. [Supported Currencies](#5-supported-currencies)
+5. [Requirements](#6-requirements)
+6. [Bugs & Features](#7-bugs-features)
+7. [License](#8-license)
 
 ---
 
-### 1. Version History:
-
-+ **Version 1.0.0** (2019-01-30):
-  + The library was officially launched and added to Github, Packagist and Composer. 
-
-### 2. Installation:
+### 1. Installation:
 
 The easiest installation method is to use Composer:
 
@@ -35,7 +32,7 @@ $ composer require benmajor/exchange-rates-api
 
 Alternatively, you can download all files from the `src/` directory and include them in your project. **Important note:** if you're manually installing the SDK, you must also install [Guzzle Client](https://github.com/guzzle/guzzle).
 
-### 3. Getting Started:
+### 2. Getting Started:
 
 Since the CurrencyExchangeAPI does not require API keys or authentication in order to access and interrogate its API, getting started with this library is easy. The following examples show how to achieve various functions using the library.
 
@@ -98,7 +95,7 @@ Please refer to the [API website](https://exchangeratesapi.io/) for further info
 
 **Please note:** By default, the `fetch()` method will return a new `ExchangeRatesAPI\Response` object. However, by passing a single argument of `true` to the `fetch()` method, you can retrieve a raw JSON resposne instead.
 
-### 4. API Reference:
+### 3. API Reference:
 
 The following API reference lists the publicly-available methods for the 
 
@@ -203,20 +200,20 @@ Returns a key/value pair array of the exchange rates that match against the requ
 `getRate( string $code )`:<br />
 Retrieves the exchange rate for a specific currency, or returns the exchange rate if only one rate is present in the response. 
 
-### 5. Supported Currencies:
+### 4. Supported Currencies:
 
 The library supports any currency currently available on the European Central Bank's web service, which can be found [here](https://exchangeratesapi.io/currencies/).
 
-### 6. Requirements:
+### 5. Requirements:
 
 This library requires PHP >= 7.0. No other platform requirements exist, but the library is dependent on [Guzzle](https://github.com/guzzle/guzzle).
 
 
-### 7. Bugs & Features:
+### 6. Bugs & Features:
 
 If you have spotted any bugs, or would like to request additional features from the library, please file an issue via the Issue Tracker on the project's Github page: [https://github.com/benmajor/ExchangeRatesAPI/issues](https://github.com/benmajor/ExchangeRatesAPI/issues).
 
-### 8. License:
+### 7. License:
 
 Licensed under the **MIT License**:
 
@@ -225,5 +222,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-(c) Copyright Ben Major, 2019.
