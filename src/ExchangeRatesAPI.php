@@ -14,10 +14,10 @@ namespace BenMajor\ExchangeRatesAPI;
 class ExchangeRatesAPI
 {
     # Default API URL:
-    const API_URL_SSL = 'https://api.exchangeratesapi.io/';
+    const API_URL_SSL = 'https://api.exchangerate.host/';
     
     # Free plan API URL:
-    const API_URL_NON_SSL = 'http://api.exchangeratesapi.io/';
+    const API_URL_NON_SSL = 'http://api.exchangerate.host/';
     
     # Fetch date
     private $fetchDate;
