@@ -71,14 +71,18 @@ class ExchangeRatesAPI
         'XOF', 'XPF', 'YER', 'ZAR', 'ZMK', 'ZMW', 'ZWL',
         ];
 
-    # Data source (default is forex):
+    # Data source (default is forex which cannot be set explicitly):
     private $source;
-    
+
+    # Supported data sources:
+    private $_sources = ['imf', 'rba', 'boc', 'snb', 'cbr', 'nbu', 'bnro', 'boi', 'nob', 'cbn', 'ecb'];
+
     # Error messages:
     private $_errors = [
         'format.invalid_date'          => 'The specified date is invalid. Please use ISO 8601 notation (e.g. YYYY-MM-DD).',
         'format.invalid_currency_code' => 'The specified currency code is invalid. Please use ISO 4217 notation (e.g. EUR).',
         'format.unsupported_currency'  => 'The specified currency code is not currently supported.',
+        'format.unsupported_source'    => 'The specified data source is not currently supported.',
         'format.invalid_amount'        => 'Conversion amount must be specified as a numeric value.',
         'format.invalid_rounding'      => 'Rounding precision must be specified as a numeric value.'
     ];
@@ -229,8 +233,14 @@ class ExchangeRatesAPI
         {
             throw new Exception( $this->_errors['format.invalid_currency_code'] );
         }
-        
+
         return in_array( $currencyCode, $this->_currencies );
+    }
+
+    # Check if a data source is in the supported range:
+    public function sourceIsSupported( string $source )
+    {
+        return in_array( $this->sanitizeSource($source), $this->_sources );
     }
     
     # Set the base currency:
@@ -338,6 +348,7 @@ class ExchangeRatesAPI
     {
         if ($source !== null) {
             $source = $this->sanitizeSource($source);
+            $this->verifySource($source);
         }
 
         $this->source = $source;
@@ -512,6 +523,18 @@ class ExchangeRatesAPI
         if( ! $this->currencyIsSupported($currencyCode) )
         {
             throw new Exception( $this->_errors['format.unsupported_currency'] );
+        }
+    }
+
+    # Runs tests to verify a source:
+    private function verifySource( string $source )
+    {
+        $source = $this->sanitizeSource($source);
+
+        # Is it a supported source?
+        if( ! $this->sourceIsSupported($source) )
+        {
+            throw new Exception( $this->_errors['format.unsupported_source'] );
         }
     }
     
