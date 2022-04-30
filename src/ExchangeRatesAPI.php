@@ -70,6 +70,9 @@ class ExchangeRatesAPI
         'VND', 'VUV', 'WST', 'XAF', 'XAG', 'XAU', 'XCD', 'XDR',
         'XOF', 'XPF', 'YER', 'ZAR', 'ZMK', 'ZMW', 'ZWL',
         ];
+
+    # Data source (default is forex):
+    private $source;
     
     # Error messages:
     private $_errors = [
@@ -143,6 +146,12 @@ class ExchangeRatesAPI
     public function getUseSSL()
     {
         return ($this->apiURL == self::API_URL_SSL);
+    }
+
+    # Get data source
+    public function getSource()
+    {
+        return $this->source;
     }
     
     /****************************/
@@ -324,6 +333,14 @@ class ExchangeRatesAPI
         return $this;
     }
 
+    # Set data source
+    public function setSource(string $source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
     /****************************/
     /*                          */
     /*   API FUNCTION CALLS     */
@@ -401,6 +418,12 @@ class ExchangeRatesAPI
         if( count($this->rates) > 0 )
         {
             $params['symbols'] = $this->getRates(',');
+        }
+
+        # Set the data source:
+        if( ! is_null($this->getSource()) )
+        {
+            $params['source'] = $this->getSource();
         }
         
         # Begin the sending:
