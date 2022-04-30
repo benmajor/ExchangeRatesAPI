@@ -334,8 +334,12 @@ class ExchangeRatesAPI
     }
 
     # Set data source
-    public function setSource(string $source)
+    public function setSource(string $source = null)
     {
+        if ($source !== null) {
+            $source = $this->sanitizeSource($source);
+        }
+
         $this->source = $source;
 
         return $this;
@@ -516,6 +520,14 @@ class ExchangeRatesAPI
     {
         return trim(
             strtoupper( $code )
+        );
+    }
+
+    # Sanitize a data source:
+    private function sanitizeSource( string $source )
+    {
+        return trim(
+            strtolower( $source )
         );
     }
 }

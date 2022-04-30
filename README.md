@@ -162,8 +162,8 @@ Sets `access_key` to be used in all requests.
 `setUseSSL( bool $use_ssl )`:<br />
 Sets the API URL according to the selected mode (SSL or non-SSL). Free plans are restricted to non-SSL usage.
 
-`setSource( string $source )`:<br />
-Sets the specified data source (other than the API default) from which to retrieve rates.
+`setSource( string $source = null )`:<br />
+Sets the specified data source (other than the API default) from which to retrieve rates. Calling with no arguments resets the source to the API default.
 
 `fetch( bool $returnJSON = false, bool $parseJSON = true )`:<br />
 Send off the request to the API and return either a `Response` object, or the raw JSON response. If `$returnJSON` is set to `true`, a standard PHP object will be returned, rather than the `ExchangeRatesAPI\Response` object. 
