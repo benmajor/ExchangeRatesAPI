@@ -122,6 +122,9 @@ Returns the `access_key` that is currently in use.
 `getUseSSL()`:<br />
 Returns a boolean flag that determines which API URL will be used to perform requests. Free plans are restricted to non-SSL usage.
 
+`getSource()`:<br />
+Returns the specified data source (other than the API default) from which to retrieve rates. Returns `null` if none is specified.
+
 `removeDateTo()`:<br />
 Removes the specified end date for the retrieval of historic rates.
 
@@ -158,6 +161,9 @@ Sets `access_key` to be used in all requests.
 
 `setUseSSL( bool $use_ssl )`:<br />
 Sets the API URL according to the selected mode (SSL or non-SSL). Free plans are restricted to non-SSL usage.
+
+`setSource( string $source )`:<br />
+Sets the specified data source (other than the API default) from which to retrieve rates.
 
 `fetch( bool $returnJSON = false, bool $parseJSON = true )`:<br />
 Send off the request to the API and return either a `Response` object, or the raw JSON response. If `$returnJSON` is set to `true`, a standard PHP object will be returned, rather than the `ExchangeRatesAPI\Response` object. 
