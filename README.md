@@ -12,13 +12,14 @@ Following pricing changes for [ExchangeRatesAPI](https://exchangerate.host/), th
 
 ## Table of Contents:
 
-1. [Installation](#2-installation)
-2. [Getting Started](#3-getting-started)
-3. [API Reference](#4-api-reference)
-4. [Supported Currencies](#5-supported-currencies)
-5. [Requirements](#6-requirements)
-6. [Bugs & Features](#7-bugs-features)
-7. [License](#8-license)
+1. [Installation](#1-installation)
+2. [Getting Started](#2-getting-started)
+3. [API Reference](#3-api-reference)
+4. [Supported Currencies](#4-supported-currencies)
+5. [Supported data sources](#5-supported-data-sources)
+6. [Requirements](#6-requirements)
+7. [Bugs & Features](#7-bugs-features)
+8. [License](#8-license)
 
 ---
 
@@ -122,6 +123,9 @@ Returns the `access_key` that is currently in use.
 `getUseSSL()`:<br />
 Returns a boolean flag that determines which API URL will be used to perform requests. Free plans are restricted to non-SSL usage.
 
+`getSource()`:<br />
+Returns the specified data source (other than the API default) from which to retrieve rates. Returns `null` if none is specified.
+
 `removeDateTo()`:<br />
 Removes the specified end date for the retrieval of historic rates.
 
@@ -129,35 +133,43 @@ Removes the specified end date for the retrieval of historic rates.
 Checks if a specific currency code is supported. `$code` should be passed as an ISO 4217 code (e.g. `EUR`).<br />
 Returns `true` if supported, or `false` if not.
 
+`sourceIsSupported( string $source )`:<br />
+Checks if a specific data source is supported.<br />
+Returns `true` if supported, or `false` if not.
+
 `setBaseCurrency( string $code )`:<br />
 Set the base currency to be used for exchange rates. `$code` should be passed an ISO 4217 code (e.g. `EUR`).<br />
-`$code` must be one of the [supported currency codes](#5-supported-currencies).
+`$code` must be one of the [supported currency codes](#4-supported-currencies).
 
 `getBaseCurrency()`:<br />
 Returns the currently specified base currency. If `setBaseCurrency()` hasn't been called, this will return the default base currency `EUR`.
 
 `addRates( array $codes )`:<br />
 Adds multiple currencies to be retrieved. `$codes` should be an array of ISO 4217 codes (e.g. `["EUR", "GBP", "BGN"]`).<br />
-Each code in the array must be of the [supported currency codes](#5-supported-currencies).<br />
+Each code in the array must be of the [supported currency codes](#4-supported-currencies).<br />
  
 `addRate( string $code )`:<br />
 Adds a new currency to be retrieved. `$code` should be passed an ISO 4217 code (e.g. `EUR`).<br />
-`$code` must be one of the [supported currency codes](#5-supported-currencies).<br />
+`$code` must be one of the [supported currency codes](#4-supported-currencies).<br />
 If no rates are added, **all** rates will be returned.
 
 `removeRates( array $codes )`:<br />
 Removes multiple currencies that has already been added to the retrieval list.  `$codes` should be an array of ISO 4217 codes (e.g. `["EUR", "GBP", "BGN"]`).<br />
-`$code` must be one of the [supported currency codes](#5-supported-currencies).
+`$code` must be one of the [supported currency codes](#4-supported-currencies).
 
 `removeRate( string $code )`:<br />
 Removes a currency that has already been added to the retrieval list.  `$code` should be passed an ISO 4217 code (e.g. `EUR`).<br />
-`$code` must be one of the [supported currency codes](#5-supported-currencies).
+`$code` must be one of the [supported currency codes](#4-supported-currencies).
 
 `setAccessKey( string $access_key )`:<br />
 Sets `access_key` to be used in all requests.
 
 `setUseSSL( bool $use_ssl )`:<br />
 Sets the API URL according to the selected mode (SSL or non-SSL). Free plans are restricted to non-SSL usage.
+
+`setSource( string $source = null )`:<br />
+Sets the specified data source (other than the API default) from which to retrieve rates. Calling with no arguments resets the source to the API default.<br />
+If provided as a string, `$source` must be one of the [supported data sources](#5-supported-data-sources).
 
 `fetch( bool $returnJSON = false, bool $parseJSON = true )`:<br />
 Send off the request to the API and return either a `Response` object, or the raw JSON response. If `$returnJSON` is set to `true`, a standard PHP object will be returned, rather than the `ExchangeRatesAPI\Response` object. 
@@ -204,16 +216,19 @@ Retrieves the exchange rate for a specific currency, or returns the exchange rat
 
 The library supports any currency currently available on the European Central Bank's web service, which can be found [here](https://exchangeratesapi.io/currencies/).
 
-### 5. Requirements:
+### 5. Supported data sources:
+The library supports the following [data sources](https://api.exchangerate.host/sources) other than the API default.
+
+### 6. Requirements:
 
 This library requires PHP >= 7.0. No other platform requirements exist, but the library is dependent on [Guzzle](https://github.com/guzzle/guzzle).
 
 
-### 6. Bugs & Features:
+### 7. Bugs & Features:
 
 If you have spotted any bugs, or would like to request additional features from the library, please file an issue via the Issue Tracker on the project's Github page: [https://github.com/benmajor/ExchangeRatesAPI/issues](https://github.com/benmajor/ExchangeRatesAPI/issues).
 
-### 7. License:
+### 8. License:
 
 Licensed under the **MIT License**:
 
