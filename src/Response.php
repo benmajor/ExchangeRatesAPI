@@ -33,7 +33,10 @@ class Response
         $this->timestamp    = date('c');
         $this->baseCurrency = $this->body->base;
         $this->rates        = $this->body->rates;
-        $this->date         = date('Y-m-d', strtotime($this->body->date));
+
+        if ($this->body->date) {
+            $this->date = date('Y-m-d', strtotime($this->body->date));
+        }
     }
     
     /****************************/
