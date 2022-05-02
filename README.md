@@ -213,7 +213,7 @@ Returns a key/value pair array of the exchange rates that match against the requ
 Retrieves the exchange rate for a specific currency, or returns the exchange rate if only one rate is present in the response. 
 
 `getDate()`:<br />
-Retrieves the date returned as part of the response (formatted as Y-m-d).
+Retrieves the date returned as part of the response (formatted as Y-m-d). If response has no `date` property, returns null.
 
 ### 4. Supported Currencies:
 
