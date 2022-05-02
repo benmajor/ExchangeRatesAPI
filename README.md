@@ -212,6 +212,9 @@ Returns a key/value pair array of the exchange rates that match against the requ
 `getRate( string $code )`:<br />
 Retrieves the exchange rate for a specific currency, or returns the exchange rate if only one rate is present in the response. 
 
+`getDate()`:<br />
+Retrieves the date returned as part of the response (formatted as Y-m-d).
+
 ### 4. Supported Currencies:
 
 The library supports any currency currently available on the European Central Bank's web service, which can be found [here](https://exchangeratesapi.io/currencies/).
