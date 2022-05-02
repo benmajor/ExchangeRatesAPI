@@ -408,19 +408,19 @@ class ExchangeRatesAPI
         }
         else
         {
-            $endpoint = 'history';
+            $endpoint = 'timeseries';
         }
         
         # Add dateFrom if specified:
         if( ! is_null($this->getDateFrom()) )
         {
-            $params['start_at'] = $this->getDateFrom();
+            $params['start_date'] = $this->getDateFrom();
         }
         
         # Add a dateTo:
         if( ! is_null($this->getDateTo()) )
         {
-            $params['end_at'] = $this->getDateTo();
+            $params['end_date'] = $this->getDateTo();
         }
         
         # Set the base currency:
