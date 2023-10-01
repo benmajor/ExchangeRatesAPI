@@ -16,10 +16,9 @@ Following pricing changes for [ExchangeRatesAPI](https://exchangerate.host/), th
 2. [Getting Started](#2-getting-started)
 3. [API Reference](#3-api-reference)
 4. [Supported Currencies](#4-supported-currencies)
-5. [Supported data sources](#5-supported-data-sources)
-6. [Requirements](#6-requirements)
-7. [Bugs & Features](#7-bugs-features)
-8. [License](#8-license)
+5. [Requirements](#6-requirements)
+6. [Bugs & Features](#7-bugs-features)
+7. [License](#8-license)
 
 ---
 
@@ -123,18 +122,11 @@ Returns the `access_key` that is currently in use.
 `getUseSSL()`:<br />
 Returns a boolean flag that determines which API URL will be used to perform requests. Free plans are restricted to non-SSL usage.
 
-`getSource()`:<br />
-Returns the specified data source (other than the API default) from which to retrieve rates. Returns `null` if none is specified.
-
 `removeDateTo()`:<br />
 Removes the specified end date for the retrieval of historic rates.
 
 `currencyIsSupported( string $code )`:<br />
 Checks if a specific currency code is supported. `$code` should be passed as an ISO 4217 code (e.g. `EUR`).<br />
-Returns `true` if supported, or `false` if not.
-
-`sourceIsSupported( string $source )`:<br />
-Checks if a specific data source is supported.<br />
 Returns `true` if supported, or `false` if not.
 
 `setBaseCurrency( string $code )`:<br />
@@ -166,10 +158,6 @@ Sets `access_key` to be used in all requests.
 
 `setUseSSL( bool $use_ssl )`:<br />
 Sets the API URL according to the selected mode (SSL or non-SSL). Free plans are restricted to non-SSL usage.
-
-`setSource( string $source = null )`:<br />
-Sets the specified data source (other than the API default) from which to retrieve rates. Calling with no arguments resets the source to the API default.<br />
-If provided as a string, `$source` must be one of the [supported data sources](#5-supported-data-sources).
 
 `fetch( bool $returnJSON = false, bool $parseJSON = true )`:<br />
 Send off the request to the API and return either a `Response` object, or the raw JSON response. If `$returnJSON` is set to `true`, a standard PHP object will be returned, rather than the `ExchangeRatesAPI\Response` object. 
@@ -210,28 +198,22 @@ Returns a key/value pair array of the exchange rates that match against the requ
 ```
 
 `getRate( string $code )`:<br />
-Retrieves the exchange rate for a specific currency, or returns the exchange rate if only one rate is present in the response. 
-
-`getDate()`:<br />
-Retrieves the date returned as part of the response (formatted as Y-m-d). If response has no `date` property, returns null.
+Retrieves the exchange rate for a specific currency, or returns the exchange rate if only one rate is present in the response.
 
 ### 4. Supported Currencies:
 
 The library supports any currency currently available on the European Central Bank's web service, which can be found [here](https://exchangeratesapi.io/currencies/).
 
-### 5. Supported data sources:
-The library supports the following [data sources](https://api.exchangerate.host/sources) other than the API default.
-
-### 6. Requirements:
+### 5. Requirements:
 
 This library requires PHP >= 7.0. No other platform requirements exist, but the library is dependent on [Guzzle](https://github.com/guzzle/guzzle).
 
 
-### 7. Bugs & Features:
+### 6. Bugs & Features:
 
 If you have spotted any bugs, or would like to request additional features from the library, please file an issue via the Issue Tracker on the project's Github page: [https://github.com/benmajor/ExchangeRatesAPI/issues](https://github.com/benmajor/ExchangeRatesAPI/issues).
 
-### 8. License:
+### 7. License:
 
 Licensed under the **MIT License**:
 
