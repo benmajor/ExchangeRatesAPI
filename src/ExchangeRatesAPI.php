@@ -98,10 +98,7 @@ class ExchangeRatesAPI
         $this->setAccessKey($access_key);
         $this->setUseSSL($use_ssl);
         
-        $this->client = new \GuzzleHttp\Client([ 'base_uri' => $this->apiURL ]);
-        if (!$use_ssl) {
-            $this->client->setDefaultOption('verify', false);
-        }
+        $this->client = new \GuzzleHttp\Client([ 'base_uri' => $this->apiURL, 'verify' => $use_ssl ]);
     }
     
     /****************************/
