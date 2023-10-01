@@ -18,6 +18,9 @@ class ExchangeRatesAPI
     
     # Free plan API URL:
     const API_URL_NON_SSL = 'http://api.exchangerate.host/';
+
+    const ENDPOINT_MOST_RECENT_EXCHANGE_RATES = 'live';
+    const ENDPOINT_TIMEFRAME                  = 'timeframe';
     
     # Fetch date
     private $fetchDate;
@@ -404,11 +407,11 @@ class ExchangeRatesAPI
         # Set the relevant endpoint:
         if( is_null($this->dateFrom) )
         {
-            $endpoint = is_null($this->fetchDate) ? 'latest' : $this->fetchDate;
+            $endpoint = is_null($this->fetchDate) ? self::ENDPOINT_MOST_RECENT_EXCHANGE_RATES : $this->fetchDate;
         }
         else
         {
-            $endpoint = 'history';
+            $endpoint = self::ENDPOINT_TIMEFRAME;
         }
         
         # Add dateFrom if specified:
