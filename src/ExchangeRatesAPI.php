@@ -74,18 +74,12 @@ class ExchangeRatesAPI
         'XOF', 'XPF', 'YER', 'ZAR', 'ZMK', 'ZMW', 'ZWL',
         ];
 
-    # Data source (default is forex which cannot be set explicitly):
-    private $source;
-
-    # Supported data sources:
-    private $_sources = ['imf', 'rba', 'boc', 'snb', 'cbr', 'nbu', 'bnro', 'boi', 'nob', 'cbn', 'ecb'];
 
     # Error messages:
     private $_errors = [
         'format.invalid_date'          => 'The specified date is invalid. Please use ISO 8601 notation (e.g. YYYY-MM-DD).',
         'format.invalid_currency_code' => 'The specified currency code is invalid. Please use ISO 4217 notation (e.g. EUR).',
         'format.unsupported_currency'  => 'The specified currency code is not currently supported.',
-        'format.unsupported_source'    => 'The specified data source is not currently supported.',
         'format.invalid_amount'        => 'Conversion amount must be specified as a numeric value.',
         'format.invalid_rounding'      => 'Rounding precision must be specified as a numeric value.'
     ];
@@ -134,7 +128,7 @@ class ExchangeRatesAPI
     # Get the specified base currency:
     public function getBaseCurrency()
     {
-        return (is_null($this->baseCurrency)) ? 'EUR' : $this->baseCurrency;
+        return (is_null($this->baseCurrency)) ? 'USD' : $this->baseCurrency;
     }
     
     # Get the rates:
@@ -155,12 +149,6 @@ class ExchangeRatesAPI
         return ($this->apiURL == self::API_URL_SSL);
     }
 
-    # Get data source
-    public function getSource()
-    {
-        return $this->source;
-    }
-    
     /****************************/
     /*                          */
     /*  SETTERS / DATA METHODS  */
@@ -240,12 +228,6 @@ class ExchangeRatesAPI
         return in_array( $currencyCode, $this->_currencies );
     }
 
-    # Check if a data source is in the supported range:
-    public function sourceIsSupported( string $source )
-    {
-        return in_array( $this->sanitizeSource($source), $this->_sources );
-    }
-    
     # Set the base currency:
     public function setBaseCurrency( string $currency )
     {
@@ -346,19 +328,6 @@ class ExchangeRatesAPI
         return $this;
     }
 
-    # Set data source
-    public function setSource(string $source = null)
-    {
-        if ($source !== null) {
-            $source = $this->sanitizeSource($source);
-            $this->verifySource($source);
-        }
-
-        $this->source = $source;
-
-        return $this;
-    }
-
     /****************************/
     /*                          */
     /*   API FUNCTION CALLS     */
@@ -429,19 +398,13 @@ class ExchangeRatesAPI
         # Set the base currency:
         if( ! is_null($this->getBaseCurrency()) )
         {
-            $params['base'] = $this->getBaseCurrency();
+            $params['source'] = $this->getBaseCurrency();
         }
         
         # Are there any rates set?
         if( count($this->rates) > 0 )
         {
-            $params['symbols'] = $this->getRates(',');
-        }
-
-        # Set the data source:
-        if( ! is_null($this->getSource()) )
-        {
-            $params['source'] = $this->getSource();
+            $params['currencies'] = $this->getRates(',');
         }
         
         # Begin the sending:
@@ -529,31 +492,11 @@ class ExchangeRatesAPI
         }
     }
 
-    # Runs tests to verify a source:
-    private function verifySource( string $source )
-    {
-        $source = $this->sanitizeSource($source);
-
-        # Is it a supported source?
-        if( ! $this->sourceIsSupported($source) )
-        {
-            throw new Exception( $this->_errors['format.unsupported_source'] );
-        }
-    }
-    
     # Sanitize a currency code:
     private function sanitizeCurrencyCode( string $code )
     {
         return trim(
             strtoupper( $code )
-        );
-    }
-
-    # Sanitize a data source:
-    private function sanitizeSource( string $source )
-    {
-        return trim(
-            strtolower( $source )
         );
     }
 }
