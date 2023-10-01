@@ -30,9 +30,9 @@ class Response
         
         # Set our properties:
         $this->statusCode   = $response->getStatusCode();
-        $this->timestamp    = date('c');
-        $this->baseCurrency = $this->body->base;
-        $this->rates        = $this->body->rates;
+        $this->timestamp    = $this->body->timestamp;
+        $this->baseCurrency = $this->body->source;
+        $this->rates        = $this->body->quotes;
 
         if ($this->body->date) {
             $this->date = date('Y-m-d', strtotime($this->body->date));
