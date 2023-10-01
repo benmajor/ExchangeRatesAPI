@@ -16,7 +16,6 @@ class Response
     private $statusCode;
     private $timestamp;
     private $baseCurrency;
-    private $date;
     
     private $rates = [ ];
     
@@ -30,13 +29,9 @@ class Response
         
         # Set our properties:
         $this->statusCode   = $response->getStatusCode();
-        $this->timestamp    = date('c');
-        $this->baseCurrency = $this->body->base;
-        $this->rates        = $this->body->rates;
-
-        if ($this->body->date) {
-            $this->date = date('Y-m-d', strtotime($this->body->date));
-        }
+        $this->timestamp    = $this->body->timestamp;
+        $this->baseCurrency = $this->body->source;
+        $this->rates        = $this->body->quotes;
     }
     
     /****************************/
@@ -63,12 +58,6 @@ class Response
         return $this->baseCurrency;
     }
 
-    # Get the date specified in the response:
-    public function getDate()
-    {
-        return $this->date;
-    }
-    
     # Get the exchange rates:
     public function getRates()
     {
@@ -101,7 +90,6 @@ class Response
         return json_encode([
             'statusCode'   => $this->getStatusCode(),
             'timestamp'    => $this->getTimestamp(),
-            'date'         => $this->getDate(),
             'baseCurrency' => $this->getBaseCurrency(),
             'rates'        => $this->getRates()
         ]);
