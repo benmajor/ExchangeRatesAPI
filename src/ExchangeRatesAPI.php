@@ -92,7 +92,7 @@ class ExchangeRatesAPI
         $this->setAccessKey($access_key);
         $this->setUseSSL($use_ssl);
         
-        $this->client = new \GuzzleHttp\Client([ 'base_uri' => $this->apiURL]);
+        $this->client = new \GuzzleHttp\Client([ 'base_uri' => $this->apiURL ]);
     }
     
     /****************************/
