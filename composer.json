@@ -3,7 +3,7 @@
     "description": "An unofficial SDK for the ExchangeRatesAPI. (https://exchangeratesapi.io/)",
     "type": "library",
     "require": {
-        "php": ">= 7.0",
+        "php": ">= 8.0",
         "guzzlehttp/guzzle": "^6.3 || ^7.0"
     },
     "license": "MIT",
@@ -16,7 +16,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "BenMajor\\ExchangeRatesAPI\\": "src/"
+            "BenMajor\\ExchangeRatesApi\\": "src/"
         }
     }
 }
